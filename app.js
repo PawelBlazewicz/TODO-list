@@ -23,7 +23,7 @@ function printNotes(notes = [], notesHTML) {
           <li ${note.done ? 'class="done"' : ''}>
             <input type="checkbox" data-index=${i} id="item${i}" ${note.done ? 'class="done" checked' : ''} />
             <label for="item${i}">${note.text}</label>
-          </li>
+          </li><hr>
           `;
       }, ``);
     // notesHTML.innerHTML = notes.map((note, i) => {
