@@ -13,7 +13,6 @@ const addNote = (e) => {
     notes.push(note);
     localStorage.setItem('notes', JSON.stringify(notes));
     document.querySelector('.noteText').value= ""; //this.reset() in non arrow function
-    console.log("test", text, e);
     printNotes(notes, notesHTML)
 };
 
@@ -26,15 +25,7 @@ function printNotes(notes = [], notesHTML) {
             <input type="submit" class="delete" value="DEL">
           </li><hr>
           `;
-      }, ``);
-    // notesHTML.innerHTML = notes.map((note, i) => {
-    //   return `
-    //     <li ${note.done ? 'class="done"' : ''}>
-    //       <input type="checkbox" data-index=${i} id="item${i}" ${note.done ? 'class="done" checked' : ''} />
-    //       <label for="item${i}">${note.text}</label>
-    //     </li>
-    //     `;
-    // }).join('');
+    }, ``);
   };
 
   function menageNotes(e) {
@@ -49,7 +40,6 @@ function printNotes(notes = [], notesHTML) {
     }
     localStorage.setItem('notes', JSON.stringify(notes));
     printNotes(notes, notesHTML)
-    //document.querySelectorAll('li')[index].classList.toggle("done", notes[index].done);
 }
 
 document.querySelector(".add-notes").addEventListener("submit", addNote);
