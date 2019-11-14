@@ -4,7 +4,7 @@ const notesHTML = document.querySelector('.toDoList');
 
 const addNote = (e) => {
     e.preventDefault();
-    const text = document.querySelector('input[name="note"]').value;
+    const text = document.querySelector('.noteText').value;
     const note = {
         text: text,
         done: false
@@ -12,7 +12,7 @@ const addNote = (e) => {
 
     notes.push(note);
     localStorage.setItem('notes', JSON.stringify(notes));
-    document.querySelector('input[name="note"]').value= ""; //this.reset() in non arrow function
+    document.querySelector('.noteText').value= ""; //this.reset() in non arrow function
     console.log("test", text, e);
     printNotes(notes, notesHTML)
 };
@@ -23,7 +23,7 @@ function printNotes(notes = [], notesHTML) {
           <li>
             <input type="checkbox" data-index=${i} id="item${i}" ${note.done ? 'class="done" checked' : ''} />
             <label for="item${i}" ${note.done ? 'class="done"' : ''}>${note.text}</label>
-            <input type="submit" class="delete" value="X">
+            <input type="submit" class="delete" value="DEL">
           </li><hr>
           `;
       }, ``);
