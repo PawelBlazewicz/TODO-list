@@ -20,9 +20,10 @@ const addNote = (e) => {
 function printNotes(notes = [], notesHTML) {
     notesHTML.innerHTML = notes.reduce((html,note, i) => {
         return html +=`
-          <li ${note.done ? 'class="done"' : ''}>
+          <li>
             <input type="checkbox" data-index=${i} id="item${i}" ${note.done ? 'class="done" checked' : ''} />
-            <label for="item${i}">${note.text}</label>
+            <label for="item${i}" ${note.done ? 'class="done"' : ''}>${note.text}</label>
+            <input type="submit" class="delete" value="X">
           </li><hr>
           `;
       }, ``);
@@ -36,17 +37,22 @@ function printNotes(notes = [], notesHTML) {
     // }).join('');
   };
 
-  function toggleDone(e) {
-    if (!e.target.matches('input')) return; 
-    const el = e.target;
-    const index = el.dataset.index;
-    notes[index].done = !notes[index].done;
+  function menageNotes(e) {
+    if (!e.target.matches('input')) { return; }
+    if (e.target.matches('input.delete')) {
+        const del = e.target.parentElement.firstElementChild.dataset.index;
+        notes.splice(del,1);
+    }else {
+        const el = e.target;
+        const index = el.dataset.index;
+        notes[index].done = !notes[index].done;
+    }
     localStorage.setItem('notes', JSON.stringify(notes));
     printNotes(notes, notesHTML)
     //document.querySelectorAll('li')[index].classList.toggle("done", notes[index].done);
 }
 
 document.querySelector(".add-notes").addEventListener("submit", addNote);
-document.querySelector(".toDoList").addEventListener("click", toggleDone);
+document.querySelector(".toDoList").addEventListener("click", menageNotes);
 
 printNotes(notes, notesHTML);
