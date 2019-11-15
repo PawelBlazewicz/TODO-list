@@ -20,7 +20,7 @@ function printNotes(notes = [], notesHTML) {
     notesHTML.innerHTML = notes.reduce((html,note, i) => {
         return html +=`
           <li>
-            <input type="checkbox" data-index=${i} id="item${i}" ${note.done ? 'class="done" checked' : ''} />
+            <input type="checkbox" data-index=${i} id="item${i}" ${note.done ? ' checked' : ''} />
             <label for="item${i}" ${note.done ? 'class="done"' : ''}>${note.text}</label>
             <input type="submit" class="delete" value="DEL">
           </li><hr>
@@ -29,8 +29,9 @@ function printNotes(notes = [], notesHTML) {
   };
 
   function menageNotes(e) {
-    if (!e.target.matches('input')) { return; }
-    if (e.target.matches('input.delete')) {
+    if (!e.target.matches('input')) { 
+        return; 
+    } else if (e.target.matches('input.delete')) {
         const del = e.target.parentElement.firstElementChild.dataset.index;
         notes.splice(del,1);
     }else {
